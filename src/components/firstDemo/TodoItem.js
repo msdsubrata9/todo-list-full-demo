@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 function TodoItem({ task, updateTask, deleteTask, toggleTask }) {
   const [isEdited, setIsEdited] = useState(false);
-  const [newText, setNewText] = useState(task.text);
+  const [newText, setNewText] = useState(task?.text);
 
   const handleUpdateTodo = () => {
     if (newText.trim()) {
@@ -12,7 +12,7 @@ function TodoItem({ task, updateTask, deleteTask, toggleTask }) {
   };
 
   return (
-    <div>
+    <div data-testid="TodoItem">
       {isEdited && (
         <input
           type="text"
@@ -23,12 +23,12 @@ function TodoItem({ task, updateTask, deleteTask, toggleTask }) {
       )}
       <input
         type="checkbox"
-        checked={task.isComplete}
+        checked={task?.isComplete}
         onChange={() => toggleTask(task.id)}
       />
-      {!isEdited && <span>{task.text}</span>}
+      {!isEdited && <span>{task?.text}</span>}
       <button onClick={() => setIsEdited(true)}>UPDATE</button>
-      <button onClick={() => deleteTask(task.id)}>DELETE</button>
+      <button onClick={() => deleteTask(task?.id)}>DELETE</button>
     </div>
   );
 }
